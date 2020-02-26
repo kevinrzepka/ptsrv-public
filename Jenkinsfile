@@ -13,6 +13,8 @@ pipeline {
           steps {
                script {
                     sh 'env | sort'
+                    def runId = createCheckRun(this, 'test')
+                    updateCheckRun(this, runId, 'success')
                }
             }
         }
