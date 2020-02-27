@@ -21,14 +21,20 @@ pipeline {
        stage('Build') {
            steps {
                script {
-                   passCheckRun(this, env.BUILD_CHECK_ID)
+                   def runId = env.BUILD_CHECK_ID
+                   startCheckRun(this, runId)
+                   echo "pseudo build"
+                   passCheckRun(this, runId)
                }
            }
        }
         stage('Test') {
            steps {
                script {
-                   failCheckRun(this, env.TEST_CHECK_ID)
+                   def runId = env.Test_CHECK_ID
+                   startCheckRun(this, runId)
+                   echo "pseudo build"
+                   failtCheckRun(this, runId)
                }
            }
        }
