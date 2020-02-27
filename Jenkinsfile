@@ -13,8 +13,30 @@ pipeline {
           steps {
                script {
                     sh 'env | sort'
+                    env.BUILD_CHECK_ID = createCheckRun(this, 'build')
+                    env.TEST_CHECK_ID = createCheckRun(this, 'test')
                }
             }
         }
+       stage('Build') {
+           steps {
+               script {
+                   def runId = env.BUILD_CHECK_ID
+                   startCheckRun(this, runId)
+                   echo "pseudo build"
+                   passCheckRun(this, runId)
+               }
+           }
+       }
+        stage('Test') {
+           steps {
+               script {
+                   def runId = env.TEST_CHECK_ID
+                   startCheckRun(this, runId)
+                   echo "pseudo build"
+                   passCheckRun(this, runId)
+               }
+           }
+       }
     }
 }
