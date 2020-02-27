@@ -34,7 +34,7 @@ pipeline {
                    def runId = env.TEST_CHECK_ID
                    startCheckRun(this, runId)
                    echo "pseudo build"
-                   failCheckRun(this, runId)
+                   passCheckRun(this, runId)
                }
            }
        }
