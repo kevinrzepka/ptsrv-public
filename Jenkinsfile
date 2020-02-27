@@ -22,14 +22,14 @@ pipeline {
        stage('Build') {
            steps {
                script {
-                   passCheckRun(this, env.BUILD_CHECK_ID)
+                   passCheckRun(this, "${env.BUILD_CHECK_ID}")
                }
            }
        }
         stage('Test') {
            steps {
                script {
-                   failCheckRun(this, env.TEST_CHECK_ID)
+                   failCheckRun(this, "${env.TEST_CHECK_ID}")
                }
            }
        }
