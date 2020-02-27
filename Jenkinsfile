@@ -13,10 +13,25 @@ pipeline {
           steps {
                script {
                     sh 'env | sort'
-                    def runId = createCheckRun(this, 'test')
+                    env.BUILD_CHECK_ID = createCheckRun(this, 'build')
+                    env.TEST_CHECK_ID = createCheckRun(this, 'test')
                     updateCheckRun(this, runId, 'success')
                }
             }
         }
+       stage('Build') {
+           steps {
+               script {
+                   passCheckRun(this, env.BUILD_CHECK_ID)
+               }
+           }
+       }
+        stage('Test') {
+           steps {
+               script {
+                   failCheckRun(this, env.TEST_CHECK_ID)
+               }
+           }
+       }
     }
 }
