@@ -31,7 +31,7 @@ pipeline {
         stage('Test') {
            steps {
                script {
-                   def runId = env.Test_CHECK_ID
+                   def runId = env.TEST_CHECK_ID
                    startCheckRun(this, runId)
                    echo "pseudo build"
                    failtCheckRun(this, runId)
